@@ -41,11 +41,6 @@ module.exports = {
       model: 'user',
       required: true
     },
-    users: {
-      collection: 'user',
-      via: 'rides',
-      through: 'rideuser'
-    },
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
