@@ -13,39 +13,7 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
-    origin: {
-      type: 'string',
-      required: true
-    },
-    destination: {
-      type: 'string',
-      required: true
-    },
-    date: {
-      type: 'string',
-      required: true
-    },
-    time: {
-      type: 'string',
-      required: true
-    },
-    seats: {
-      type: 'number',
-      required: true
-    },
-    price: {
-      type: 'number',
-      required: true
-    },
-    driver: {
-      model: 'user',
-      required: true
-    },
-    users: {
-      collection: 'user',
-      via: 'rides',
-      through: 'rideuser'
-    },
+
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
