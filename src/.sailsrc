@@ -1,9 +1,14 @@
 {
   "generators": {
-    "modules": {}
+    "modules": {
+      "page": "create-sails-generator/generators/page",
+      "inertia": "create-sails-generator/generators/inertia",
+      "inertia-redirect": "create-sails-generator/generators/inertia-redirect",
+      "bad-request": "create-sails-generator/generators/bad-request"
+    }
   },
   "_generatedWith": {
-    "sails": "1.5.9",
-    "sails-generate": "2.0.10"
+    "sails": "1.5.2",
+    "sails-generate": "2.0.6"
   }
 }
