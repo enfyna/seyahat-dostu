@@ -19,5 +19,21 @@ module.exports.routes = {
    *                                                                          *
    ***************************************************************************/
   'GET /': 'home/index',
-  'GET /example': 'example/index'
+  'GET /example': 'example/index',
+  'GET api/users/find': 'user.find',
+  'GET api/users/:id': 'user.findOne',
+  'POST api/users': 'user.create',
+  'PUT api/users/:id': 'user.update',
+  'DELETE api/users/:id': 'user.delete',
+  'GET api/users/:id/rides': 'user.rides',
+  'POST api/users/:id/join-ride': 'user.joinRide',
+  'GET api/rides/find': 'ride.find',
+  'GET api/rides/:id': 'ride.findOne',
+  'POST api/rides': 'ride.create',
+  'PUT api/rides/:id': 'ride.update',
+  'DELETE api/rides/:id': 'ride.delete',
+  'GET api/rides/:id/users': 'ride.users',
+  'POST api/rides/:id/join': 'ride.join',
+  'POST api/rides/:id/leave': 'ride.leave',
+
 }
