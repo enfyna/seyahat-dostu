@@ -13,47 +13,42 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
-    ID: {
+    Interests: {
       type: 'string',
       required: true
     },
 
-    Ilgi_Alanları: {
-      type: 'string',
-      required: true
-    },
-
-    Sofor: {
+    Driver: {
       type: 'boolean',
       required: true
     },
 
-    Fotograf: {
+    Photograph: {
       type: 'string', // ??
       required: true
     },
 
-    Yas: {
+    Age: {
       type: 'string',
       required: true
     },
 
-    Konum: {
+    Location: {
       type: 'string',
       required: true
     },
 
-    Sigara: {
+    Smoking: {
       type: 'boolean',
       required: true
     },
 
-    Puan: {
+    Point: {
       type: 'float',
       required: true
     },
 
-    Hakkimda: {
+    About: {
       type: 'string',
       required: true
     },
@@ -69,9 +64,6 @@ module.exports = {
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
   },
-
-  primaryKey: 'ID',
-
 
 };
 

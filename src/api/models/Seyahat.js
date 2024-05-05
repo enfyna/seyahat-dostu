@@ -13,98 +13,92 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
-    ID: {
+    Departure_Point: {
       type: 'string',
       required: true
     },
 
-    Kalkis_Nok: {
+    Arrival_Point: {
       type: 'string',
       required: true
     },
 
-    Varis_Nok: {
-      type: 'string',
-      required: true
-    },
-
-    
-    Tarih: {
+    Date: {
       type: 'string',
       required: true
     },
 
     
-    Fiyat: {
+    Price: {
       type: 'float',
       required: true
     },
 
     
-    Kisi_Say: {
+    Number_of_Ppl: {
       type: 'int',
       required: true
     },
 
     
-    Kalkis_Saat: {
+    Departure_Time: {
       type: 'string',
       required: true
     },
 
     
-    Varis_Saat: {
+    Arrival_Time: {
       type: 'string',
       required: true
     },
 
     
-    Sure: {
+    Time: {
       type: 'string',
       required: true
     },
 
     
-    Sofor_Ad: {
+    Driver_Name: {
       type: 'string',
       required: true
     },
 
     
-    Sofor_Foto: {
+    Driver_Photo: {
       type: 'string', //?
       required: true
     },
 
     
-    Sofor_ID: {
+    Driver_ID: {
       type: 'string',
       required: true
     },
 
-    Sofor_Puan: {
+    Driver_Point: {
       type: 'float',
       required: true
     },
 
-    Arac_Marka: {
+    Car_Brand: {
       type: 'string',
       required: true
     },
     
-    Arac_Model: {
-      type: 'string',
-      required: true
-    },
-
-    
-    Arac_Plaka: {
+    Car_Model: {
       type: 'string',
       required: true
     },
 
     
-    Mesaj: {
+    Car_Plate: {
+      type: 'string',
+      required: true
+    },
+
+    
+    Message: {
       type: 'string',
       required: true
     },
@@ -121,8 +115,6 @@ module.exports = {
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
   },
-
-  primaryKey: 'ID',
 
 };
 
