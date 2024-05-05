@@ -1,5 +1,5 @@
 /**
- * User.js
+ * Comment.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -13,46 +13,28 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
-    Interests: {
+    From_ID: {
       type: 'string',
       required: true
     },
 
-    Driver: {
-      type: 'boolean',
-      required: true
-    },
 
-    Photograph: {
-      type: 'string', // ??
-      required: true
-    },
-
-    Age: {
+    To_ID: {
       type: 'string',
       required: true
     },
 
-    Location: {
-      type: 'string',
-      required: true
-    },
-
-    Smoking: {
-      type: 'boolean',
-      required: true
-    },
 
     Point: {
       type: 'number',
       required: true
     },
 
-    About: {
+
+    Comment: {
       type: 'string',
       required: true
     },
-
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
