@@ -35,5 +35,10 @@ module.exports.routes = {
   'GET /api/rides/:id/users': 'ride.users',
   'POST /api/rides/:id/join': 'ride.join',
   'POST /api/rides/:id/leave': 'ride.leave',
-
+  'POST /api/comments': 'comment.create',
+  'GET /api/comments/find': 'comment.find',
+  'GET /api/comments/:to_id': 'comment.findByTo_Id',
+  'PUT /api/comments/:id': 'comment.update',
+  'DELETE /api/comments/:id': 'comment.delete',
+  'GET /api/comments/:from_id': 'comment.findByFrom_Id',
 }
