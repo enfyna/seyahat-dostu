@@ -1,4 +1,3 @@
-import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
 import { createInertiaApp } from '@inertiajs/react'
@@ -11,7 +10,6 @@ createInertiaApp({
   setup({ el, App, props }) {
     createRoot(el).render(
       <>
-        <Navbar></Navbar>
         <App {...props} />
         <Footer></Footer>
       </>

@@ -1,19 +1,20 @@
+import { router } from '@inertiajs/react';
 import { useState } from 'react';
 
 export default function SignupForm() {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    email: '',
-    phone: '',
-    username: '',
-    password: '',
+    Name: '',
+    Email: '',
+    Phone: '',
+    Password: '',
     confirmPassword: '',
-    interests: [],
-    isDriver: false,
-    profilePhoto: null,
-    age: 18,
-    location: '',
-    about: ''
+    Interests: [],
+    Smoking: false,
+    Photograph: null,
+    Age: 18,
+    Location: '',
+    About: '',
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -22,11 +23,11 @@ export default function SignupForm() {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    if (name === 'phone') {
+    if (name === 'Phone') {
       const formattedPhone = formatPhoneNumber(value);
       setFormData({
         ...formData,
-        phone: formattedPhone
+        Phone: formattedPhone
       });
     } else {
       setFormData({
@@ -39,18 +40,23 @@ export default function SignupForm() {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file && (file.type === 'image/jpeg' || file.type === 'image/png')) {
-      setFormData({
-        ...formData,
-        profilePhoto: file
-      });
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
+        setFormData({
+          ...formData,
+          Photograph: base64String
+        });
+      };
+      reader.readAsDataURL(file);
     } else {
       alert('Yalnızca JPG veya PNG dosyalarına izin verilmektedir.');
     }
   };
 
   const handleNextStep = () => {
-    const { email, phone, username, password, confirmPassword } = formData;
-    if (!email || !phone || !username || !password || !confirmPassword || password !== confirmPassword) {
+    const { Email, Phone, Name, Password, confirmPassword } = formData;
+    if (!Email || !Phone || !Name || !Password || !confirmPassword || Password !== confirmPassword) {
       setShake(true);
       setTimeout(() => setShake(false), 500);
     } else {
@@ -60,21 +66,29 @@ export default function SignupForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { interests, isDriver, age, location, about } = formData;
-    if (!interests.length || !age || !location || !about || age < 18) {
+    const { Name, Password, Age, Location } = formData;
+    if (!Name || !Password || !Age || !Location || Age < 18) {
       setShake(true);
       setTimeout(() => setShake(false), 500);
     } else {
       // Form submission logic goes here
-      alert('Form submitted successfully!');
+      delete formData.confirmPassword
+      if (typeof formData.Interests == 'object')
+        formData.Interests = formData.Interests.join(",")
+      console.log(formData)
+      console.log("---")
+      console.log(JSON.stringify(formData))
+      router.post('/api/users', formData, {
+        onFinish: () => router.visit('/'),
+      })
     }
   };
 
   const handleAddInterest = () => {
-    if (newInterest && !formData.interests.includes(newInterest)) {
+    if (newInterest && !formData.Interests.includes(newInterest)) {
       setFormData({
         ...formData,
-        interests: [...formData.interests, newInterest]
+        Interests: [...formData.Interests, newInterest]
       });
       setNewInterest('');
     }
@@ -83,18 +97,18 @@ export default function SignupForm() {
   const handleRemoveInterest = (interest) => {
     setFormData({
       ...formData,
-      interests: formData.interests.filter(i => i !== interest)
+      Interests: formData.Interests.filter(i => i !== interest)
     });
   };
 
-  const formatPhoneNumber = (phone) => {
-    phone = phone.replace(/[^\d]/g, '');
-    if (phone.length > 10) phone = phone.slice(0, 10);
-    const match = phone.match(/(\d{3})(\d{3})(\d{2})(\d{2})/);
+  const formatPhoneNumber = (Phone) => {
+    Phone = Phone.replace(/[^\d]/g, '');
+    if (Phone.length > 10) Phone = Phone.slice(0, 10);
+    const match = Phone.match(/(\d{3})(\d{3})(\d{4})/);
     if (match) {
-      return `${match[1]}-${match[2]}-${match[3]}-${match[4]}`;
+      return `${match[1]}-${match[2]}-${match[3]}`;
     }
-    return phone;
+    return Phone;
   };
 
   const handleSignUpRedirect = () => {
@@ -102,217 +116,217 @@ export default function SignupForm() {
   };
 
   return (
-    <div className="flex items-center justify-center">
-      <div className="bg-gray-900 p-8 rounded-lg shadow-lg max-w-md w-full">
-        <form className="space-y-6" onSubmit={handleSubmit}>
-          {step === 1 && (
-            <>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-white">Email</label>
+    <div className="flex flex-col items-center justify-center bg-gray-900 p-8 rounded-lg shadow-lg max-w-md w-full">
+      <a href="/" className="flex justify-center pb-8 ">
+        <img className="aspect-square w-1/4" src="/images/logo.png" alt="Seyahat Dostu"></img>
+      </a>
+      <form className="space-y-6 w-full" onSubmit={handleSubmit}>
+        {step === 1 && (
+          <>
+            <div>
+              <input
+                placeholder="E-mail"
+                type="Email"
+                id="Email"
+                name="Email"
+                value={formData.Email}
+                onChange={handleChange}
+                className="mt-1 block w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-md form-input focus:border-teal-400 transition duration-200 ease-in-out hover:border-teal-400"
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                id="Phone"
+                name="Phone"
+                value={formData.Phone}
+                onChange={handleChange}
+                className="mt-1 block w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-md form-input focus:border-teal-400 transition duration-200 ease-in-out hover:border-teal-400"
+                placeholder="Telefon Numarası"
+              />
+            </div>
+            <div>
+              <input
+                placeholder="Adınız Soyadınız"
+                type="text"
+                id="Name"
+                name="Name"
+                value={formData.Name}
+                onChange={handleChange}
+                className="mt-1 block w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-md form-input focus:border-teal-400 transition duration-200 ease-in-out hover:border-teal-400"
+              />
+            </div>
+            <div>
+              <div className="relative">
                 <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
+                  placeholder="Şifre"
+                  type={showPassword ? 'text' : 'Password'}
+                  id="Password"
+                  name="Password"
+                  value={formData.Password}
                   onChange={handleChange}
                   className="mt-1 block w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-md form-input focus:border-teal-400 transition duration-200 ease-in-out hover:border-teal-400"
                 />
-              </div>
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-white">Telefon Numarası</label>
-                <input
-                  type="text"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="mt-1 block w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-md form-input focus:border-teal-400 transition duration-200 ease-in-out hover:border-teal-400"
-                  placeholder="xxx-xxx-xx-xx"
-                />
-              </div>
-              <div>
-                <label htmlFor="username" className="block text-sm font-medium text-white">Kullanıcı Adı</label>
-                <input
-                  type="text"
-                  id="username"
-                  name="username"
-                  value={formData.username}
-                  onChange={handleChange}
-                  className="mt-1 block w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-md form-input focus:border-teal-400 transition duration-200 ease-in-out hover:border-teal-400"
-                />
-              </div>
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-white">Şifre</label>
-                <div className="relative">
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    id="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    className="mt-1 block w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-md form-input focus:border-teal-400 transition duration-200 ease-in-out hover:border-teal-400"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 px-3 py-2 text-white"
-                  >
-                    {showPassword ? 'Gizle' : 'Göster'}
-                  </button>
-                </div>
-              </div>
-              <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-white">Şifreyi Doğrula</label>
-                <div className="relative">
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    className="mt-1 block w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-md form-input focus:border-teal-400 transition duration-200 ease-in-out hover:border-teal-400"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 px-3 py-2 text-white"
-                  >
-                    {showPassword ? 'Gizle' : 'Göster'}
-                  </button>
-                </div>
-              </div>
-              <div>
                 <button
                   type="button"
-                  onClick={handleNextStep}
-                  className={`w-full py-3 bg-teal-500 text-white font-semibold rounded-md hover:bg-teal-600 transition duration-200 ease-in-out ${shake ? 'shake' : ''}`}
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 px-3 py-2 text-white"
                 >
-                  İleri
+                  {showPassword ? 'Gizle' : 'Göster'}
                 </button>
               </div>
-            </>
-          )}
-          {step === 2 && (
-            <>
-              <div>
-                <label htmlFor="interests" className="block text-sm font-medium text-white text-center">Platformu etkin bir şekilde kullanabilmen için daha fazla bilgiye ihtiyacımız var ^_^</label>
-              </div>
-              <div>
-                <label htmlFor="interests" className="block text-sm font-medium text-white">İlgi Alanları</label>
-                <div className="flex space-x-3 mt-1">
-                  <select
-                    id="interests"
-                    name="interests"
-                    value={newInterest}
-                    onChange={(e) => setNewInterest(e.target.value)}
-                    className="block w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-md form-input focus:border-teal-400 transition duration-200 ease-in-out hover:border-teal-400"
-                  >
-                    <option value="">Seçiniz</option>
-                    <option value="Spor">Spor</option>
-                    <option value="Müzik">Müzik</option>
-                    <option value="Sanat">Sanat</option>
-                    <option value="Teknoloji">Teknoloji</option>
-                    <option value="Gezmek">Gezmek</option>
-                  </select>
-                  <button
-                    type="button"
-                    onClick={handleAddInterest}
-                    className="py-3 px-4 bg-teal-500 text-white font-semibold rounded-md hover:bg-teal-600 transition duration-200 ease-in-out"
-                  >
-                    Ekle
-                  </button>
-                </div>
-                <div className="mt-2 flex flex-wrap space-x-2">
-                  {formData.interests.map((interest, index) => (
-                    <span key={index} className="bg-teal-600 text-white py-1 px-3 rounded-md flex items-center space-x-2">
-                      <span>{interest}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveInterest(interest)}
-                        className="text-white ml-2"
-                      >
-                        &times;
-                      </button>
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <label htmlFor="isDriver" className="block text-sm font-medium text-white">Şoför müsünüz?</label>
+            </div>
+            <div>
+              <div className="relative">
                 <input
-                  type="checkbox"
-                  id="isDriver"
-                  name="isDriver"
-                  checked={formData.isDriver}
-                  onChange={handleChange}
-                  className="mt-1 block"
-                />
-              </div>
-              <div>
-                <label htmlFor="profilePhoto" className="block text-sm font-medium text-white">Profil Fotoğrafı</label>
-                <input
-                  type="file"
-                  id="profilePhoto"
-                  name="profilePhoto"
-                  accept="image/jpeg, image/png"
-                  onChange={handleFileChange}
-                  className="mt-1 block w-full text-white"
-                />
-              </div>
-              <div>
-                <label htmlFor="age" className="block text-sm font-medium text-white">Yaş</label>
-                <input
-                  type="number"
-                  id="age"
-                  name="age"
-                  value={formData.age}
+                  placeholder="Şifre Doğrula"
+                  type={showPassword ? 'text' : 'Password'}
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
                   onChange={handleChange}
                   className="mt-1 block w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-md form-input focus:border-teal-400 transition duration-200 ease-in-out hover:border-teal-400"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 px-3 py-2 text-white"
+                >
+                  {showPassword ? 'Gizle' : 'Göster'}
+                </button>
               </div>
-              <div>
-                <label htmlFor="location" className="block text-sm font-medium text-white">Lokasyon</label>
+            </div>
+            <div>
+              <button
+                type="button"
+                onClick={handleNextStep}
+                className={`w-full py-3 bg-teal-500 text-white font-semibold rounded-md hover:bg-teal-600 transition duration-200 ease-in-out ${shake ? 'shake' : ''}`}
+              >
+                İleri
+              </button>
+            </div>
+          </>
+        )}
+        {step === 2 && (
+          <>
+            <div>
+              <label htmlFor="Interests" className="block text-sm font-medium text-white text-center">Platformu etkin bir şekilde kullanabilmen için daha fazla bilgiye ihtiyacımız var ^_^</label>
+            </div>
+            <div>
+              <label htmlFor="Interests" className="block text-sm font-medium text-white">İlgi Alanları</label>
+              <div className="flex space-x-3 mt-1">
                 <select
-
-                  id="location"
-                  name="location"
-                  value={formData.location}
-                  onChange={handleChange}
-                  className="mt-1 block w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-md form-input focus:border-teal-400 transition duration-200 ease-in-out hover:border-teal-400"
+                  id="Interests"
+                  name="Interests"
+                  value={newInterest}
+                  onChange={(e) => setNewInterest(e.target.value)}
+                  className="block w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-md form-input focus:border-teal-400 transition duration-200 ease-in-out hover:border-teal-400"
                 >
                   <option value="">Seçiniz</option>
-                  <option value="istanbul">İstanbul</option>
-                  <option value="ankara">Ankara</option>
-                  <option value="izmir">İzmir</option>
-                  <option value="antalya">Antalya</option>
-                  <option value="adana">Adana</option>
+                  <option value="Spor">Spor</option>
+                  <option value="Müzik">Müzik</option>
+                  <option value="Sanat">Sanat</option>
+                  <option value="Teknoloji">Teknoloji</option>
+                  <option value="Gezmek">Gezmek</option>
                 </select>
-              </div>
-              <div>
-                <label htmlFor="about" className="block text-sm font-medium text-white">Hakkımda</label>
-                <textarea
-                  id="about"
-                  name="about"
-                  value={formData.about}
-                  onChange={handleChange}
-                  className="mt-1 block w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-md form-input focus:border-teal-400 transition duration-200 ease-in-out hover:border-teal-400"
-                />
-              </div>
-              <div>
                 <button
-                  type="submit"
-                  className={`w-full py-3 bg-teal-500 text-white font-semibold rounded-md hover:bg-teal-600 transition duration-200 ease-in-out ${shake ? 'shake' : ''}`}
+                  type="button"
+                  onClick={handleAddInterest}
+                  className="py-3 px-4 bg-teal-500 text-white font-semibold rounded-md hover:bg-teal-600 transition duration-200 ease-in-out"
                 >
-                  Kaydol
+                  Ekle
                 </button>
               </div>
-            </>
-          )}
-          <div className="text-center mt-4 text-white">
-            Hesabınız var mu? <button onClick={handleSignUpRedirect} className="text-teal-400 hover:text-teal-500">Giriş Yap</button>
-          </div>
-        </form>
-      </div>
+              <div className="mt-2 flex flex-wrap space-x-2">
+                {formData.Interests.map((interest, index) => (
+                  <span key={index} className="bg-teal-600 text-white py-1 px-3 rounded-md flex items-center space-x-2">
+                    <span>{interest}</span>
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveInterest(interest)}
+                      className="text-white ml-2"
+                    >
+                      &times;
+                    </button>
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label htmlFor="Smoking" className="block text-sm font-medium text-white">Sigara içiyor musunuz?</label>
+              <input
+                type="checkbox"
+                id="Smoking"
+                name="Smoking"
+                checked={formData.Smoking}
+                onChange={handleChange}
+                className="mt-1 block"
+              />
+            </div>
+            <div>
+              <label htmlFor="Photograph" className="block text-sm font-medium text-white">Profil Fotoğrafı</label>
+              <input
+                type="file"
+                id="Photograph"
+                name="Photograph"
+                accept="image/jpeg, image/png"
+                onChange={handleFileChange}
+                className="mt-1 block w-full text-white"
+              />
+            </div>
+            <div>
+              <label htmlFor="Age" className="block text-sm font-medium text-white">Yaş</label>
+              <input
+                type="number"
+                id="Age"
+                name="Age"
+                value={formData.Age}
+                onChange={handleChange}
+                className="mt-1 block w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-md form-input focus:border-teal-400 transition duration-200 ease-in-out hover:border-teal-400"
+              />
+            </div>
+            <div>
+              <label htmlFor="Location" className="block text-sm font-medium text-white">Lokasyon</label>
+              <select
+
+                id="Location"
+                name="Location"
+                value={formData.Location}
+                onChange={handleChange}
+                className="mt-1 block w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-md form-input focus:border-teal-400 transition duration-200 ease-in-out hover:border-teal-400"
+              >
+                <option value="">Seçiniz</option>
+                <option value="istanbul">İstanbul</option>
+                <option value="ankara">Ankara</option>
+                <option value="izmir">İzmir</option>
+                <option value="antalya">Antalya</option>
+                <option value="adana">Adana</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="About" className="block text-sm font-medium text-white">Hakkımda</label>
+              <textarea
+                id="About"
+                name="About"
+                value={formData.About}
+                onChange={handleChange}
+                className="mt-1 block w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-md form-input focus:border-teal-400 transition duration-200 ease-in-out hover:border-teal-400"
+              />
+            </div>
+            <div>
+              <button
+                type="submit"
+                className={`w-full py-3 bg-teal-500 text-white font-semibold rounded-md hover:bg-teal-600 transition duration-200 ease-in-out ${shake ? 'shake' : ''}`}
+              >
+                Kaydol
+              </button>
+            </div>
+          </>
+        )}
+        <div className="text-center mt-4 text-white">
+          Hesabınız var mu? <button onClick={handleSignUpRedirect} className="text-teal-400 hover:text-teal-500">Giriş Yap</button>
+        </div>
+      </form>
     </div>
   );
 }

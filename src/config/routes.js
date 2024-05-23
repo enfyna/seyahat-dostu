@@ -33,6 +33,7 @@ module.exports.routes = {
    'GET /example': 'pages/example/index',
 
    'GET /login': 'pages/login/index',
+   'GET /logout': 'pages/logout/index',
    'GET /signup': 'pages/signup/index',
    'GET /profile': 'pages/profile/index',
 
@@ -49,6 +50,9 @@ module.exports.routes = {
    // | |_| \__ \  __/ |    / ___ \|  __/| |
    //  \___/|___/\___|_|___/_/   \_\_|  |___|
    //                 |_____|
+   'POST /api/users/login': 'user.login',
+   'POST /api/users/logout': 'user.logout',
+
    'GET /api/users/find': 'user.find',
    'GET /api/users/:id': 'user.findOne',
 

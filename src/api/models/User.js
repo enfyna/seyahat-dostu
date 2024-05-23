@@ -13,19 +13,39 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
-    Interests: {
+    Name: {
       type: 'string',
       required: true
     },
 
+    Email: {
+      type: 'string',
+      required: true
+    },
+
+    Phone: {
+      type: 'string',
+      required: true
+    },
+
+    Password: {
+      type: 'string',
+      required: true
+    },
+
+    Interests: {
+      type: 'string',
+      defaultsTo: ''
+    },
+
     Driver: {
       type: 'boolean',
-      required: true
+      defaultsTo: false
     },
 
     Photograph: {
       type: 'string', // ??
-      required: true
+      allowNull: true,
     },
 
     Age: {
@@ -40,17 +60,17 @@ module.exports = {
 
     Smoking: {
       type: 'boolean',
-      required: true
+      defaultsTo: false
     },
 
     Point: {
       type: 'number',
-      required: true
+      defaultsTo: 0,
     },
 
     About: {
       type: 'string',
-      required: true
+      defaultsTo: ''
     },
 
 
@@ -63,7 +83,28 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
+    GivenComments: {
+      collection: 'comment',
+      via: 'Commenter'
+    },
+
+    ReceivedComments: {
+      collection: 'comment',
+      via: 'Receiver'
+    },
+
+    Reservations: {
+      collection: 'ride',
+      via: 'Customers'
+    },
+
+    Rides: {
+      collection: 'ride',
+      via: 'Driver'
+    }
   },
 
+  customToJSON: function () {
+    return _.omit(this, ['Password']);
+  },
 };
-

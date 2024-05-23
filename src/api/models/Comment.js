@@ -13,23 +13,10 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
-    From_ID: {
-      type: 'string',
-      required: true
-    },
-
-
-    To_ID: {
-      type: 'string',
-      required: true
-    },
-
-
     Point: {
       type: 'number',
       required: true
     },
-
 
     Comment: {
       type: 'string',
@@ -45,7 +32,16 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
-  },
+    Commenter: {
+      model: 'user',
+      unique: true,
+    },
 
+    Receiver: {
+      model: 'user',
+      unique: true,
+    }
+
+  },
 };
 
