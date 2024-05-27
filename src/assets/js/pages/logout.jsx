@@ -6,7 +6,6 @@ export default function Logout() {
 
   if (!loggedInUser) {
     router.visit('/')
-    return
   }
 
   router.post('/api/users/logout', null, {
@@ -18,28 +17,21 @@ export default function Logout() {
   })
 
   return (
-    <div className="flex flex-col justify-center w-screen min-h-screen">
-      <div className="relative flex flex-col justify-end form-pattern py-4">
-        <div className="overflow-hidden absolute w-50 h-full flex items-center z-0">
+    <div className="flex overflow-hidden flex-col justify-center w-screen min-h-screen xl:min-h-[50vh]">
+      <div className="flex flex-col justify-center form-pattern py-4 min-h-screen xl:min-h-[50vh]">
+        <div className="w-50 h-full flex items-center z-0">
           <div className="flex whitespace-nowrap">
             <div className="flex animate-scroll">
-              <span className="text-blue-900 font-extrabold text-8xl 2xl:text-[11rem]">ÇıkışYap</span>
-              <span className="text-blue-900 font-extrabold text-8xl 2xl:text-[11rem]">ÇıkışYap</span>
-              <span className="text-blue-900 font-extrabold text-8xl 2xl:text-[11rem]">ÇıkışYap</span>
-              <span className="text-blue-900 font-extrabold text-8xl 2xl:text-[11rem]">ÇıkışYap</span>
-              <span className="text-blue-900 font-extrabold text-8xl 2xl:text-[11rem]">ÇıkışYap</span>
-              <span className="text-blue-900 font-extrabold text-8xl 2xl:text-[11rem]">ÇıkışYap</span>
-              <span className="text-blue-900 font-extrabold text-8xl 2xl:text-[11rem]">ÇıkışYap</span>
-              <span className="text-blue-900 font-extrabold text-8xl 2xl:text-[11rem]">ÇıkışYap</span>
-              <span className="text-blue-900 font-extrabold text-8xl 2xl:text-[11rem]">ÇıkışYap</span>
-              <span className="text-blue-900 font-extrabold text-8xl 2xl:text-[11rem]">ÇıkışYap</span>
-            </div>
-          </div>
-        </div>
-        <div className="w-screen relative z-10">
-          <div className="container m-auto flex items-center justify-center lg:justify-end gap-4">
-            <div className="basis-2/3 max-w-md">
-              Çıkış Yapılıyor
+              <span className="text-blue-900 font-extrabold text-8xl 2xl:text-[11rem]">ÇıkışYapılıyor</span>
+              <span className="text-blue-900 font-extrabold text-8xl 2xl:text-[11rem]">ÇıkışYapılıyor</span>
+              <span className="text-blue-900 font-extrabold text-8xl 2xl:text-[11rem]">ÇıkışYapılıyor</span>
+              <span className="text-blue-900 font-extrabold text-8xl 2xl:text-[11rem]">ÇıkışYapılıyor</span>
+              <span className="text-blue-900 font-extrabold text-8xl 2xl:text-[11rem]">ÇıkışYapılıyor</span>
+              <span className="text-blue-900 font-extrabold text-8xl 2xl:text-[11rem]">ÇıkışYapılıyor</span>
+              <span className="text-blue-900 font-extrabold text-8xl 2xl:text-[11rem]">ÇıkışYapılıyor</span>
+              <span className="text-blue-900 font-extrabold text-8xl 2xl:text-[11rem]">ÇıkışYapılıyor</span>
+              <span className="text-blue-900 font-extrabold text-8xl 2xl:text-[11rem]">ÇıkışYapılıyor</span>
+              <span className="text-blue-900 font-extrabold text-8xl 2xl:text-[11rem]">ÇıkışYapılıyor</span>
             </div>
           </div>
         </div>

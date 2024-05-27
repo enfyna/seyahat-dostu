@@ -42,6 +42,7 @@ module.exports = {
   logout: async function(req, res) {
     try {
       sails.inertia.flushShared('loggedInUser')
+      res.set('X-Inertia', 'true');
       return res.ok(200)
     } catch (err) {
       return res.serverError(err);
