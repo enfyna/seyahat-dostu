@@ -11,7 +11,7 @@ export default function GecmisRezervasyonKarti() {
           <p className="text-sm">Jane Doe</p>
           <p className="text-xs text-gray-500">30 yaşında, Ankara</p>
         </div>
-        <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-400 transition-colors duration-300">Profilini İncele</button>
+        <button className="text-center bg-blue-500 hover:bg-blue-900 border-blue-500 border-solid border-2 text-white px-3 py-2 text-sm font-medium rounded-full transition">Profilini İncele</button>
       </div>
     </div>
   )
