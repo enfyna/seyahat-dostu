@@ -1,17 +1,31 @@
-import { router, usePage } from '@inertiajs/react';
+import { router } from '@inertiajs/react';
 import { useState } from 'react';
 
 export default function DriverForm() {
-  const { props } = usePage();
-  const { loggedInUser } = props;
-  const userID = loggedInUser.id;
-
   const [formData, setFormData] = useState({
     opt1: '',
     opt2: '',
+    opt3: '',
   });
 
   const [shake, setShake] = useState(false);
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file && (file.type === 'image/jpeg' || file.type === 'image/png')) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
+        setFormData({
+          ...formData,
+          opt3: base64String
+        });
+      };
+      reader.readAsDataURL(file);
+    } else {
+      alert('Yalnızca JPG veya PNG dosyalarına izin verilmektedir.');
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,7 +44,7 @@ export default function DriverForm() {
       setShake(true);
       setTimeout(() => setShake(false), 500);
     } else {
-      router.post('/api/users/' + userID + '/enable-driver', formData, {
+      router.post('/api/users/enable-driver', formData, {
         onFinish: () => router.visit('/my_rides'),
       })
     }
@@ -69,6 +83,17 @@ export default function DriverForm() {
               <polyline points="20 6 9 17 4 12" className='pointer-events-none'></polyline>
             </svg>
           </div>
+        </div>
+        <div>
+          <label htmlFor="Ehliyet" className="block mb-2 mt-8 text-sm font-medium text-gray-900 dark:text-white">Ehliyet</label>
+          <input
+            type="file"
+            id="Ehliyet"
+            name="Ehliyet"
+            accept="image/jpeg, image/png"
+            onChange={handleFileChange}
+            className="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 file:bg-gray-50 file:border-0 file:me-4 file:py-3 file:px-4 dark:file:bg-gray-700 dark:file:text-gray-400"
+          />
         </div>
         <div>
           <div className="relative">

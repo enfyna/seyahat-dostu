@@ -67,7 +67,7 @@ module.exports.routes = {
 
    'DELETE /api/users/:id': 'user.delete',
 
-   'POST /api/users/:id/enable-driver': 'user.enableDriver',
+   'POST /api/users/enable-driver': 'user.enableDriver',
    'GET /api/users/:id/rides': 'user.rides',
 
 

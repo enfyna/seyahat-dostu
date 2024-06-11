@@ -43,8 +43,13 @@ module.exports = {
       defaultsTo: false
     },
 
+    DrivingLicence: {
+      type: 'string',
+      allowNull: true,
+    },
+
     Photograph: {
-      type: 'string', // ??
+      type: 'string',
       allowNull: true,
     },
 

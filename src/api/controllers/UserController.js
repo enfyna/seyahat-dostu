@@ -93,9 +93,10 @@ module.exports = {
   enableDriver: async function(req, res) {
     try {
       res.set('X-Inertia', 'true');
-      const id = req.params.id;
+      const id = req.session.userID;
       let user = await User.findOne({ id });
       user.Driver = true;
+      user.DrivingLicence = req.body.opt3;
       user = await User.updateOne({ id }).set(user)
       sails.inertia.flushShared('loggedInUser')
       sails.inertia.share('loggedInUser', user)
@@ -109,7 +110,7 @@ module.exports = {
   point: async function(req, res) {
     try {
       res.set('X-Inertia', 'true');
-      
+
       const { driverID, Point } = req.body;
       let user = await User.findOne({ id:driverID });
       user.Point += Point;
