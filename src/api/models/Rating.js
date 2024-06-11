@@ -1,5 +1,5 @@
 /**
- * Comment.js
+ * Rating.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -13,25 +13,12 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
-    From_ID: {
-      type: 'string',
-      required: true
-    },
-
-
-    To_ID: {
-      type: 'string',
-      required: true
-    },
-
-
     Point: {
       type: 'number',
       required: true
     },
 
-
-    Comment: {
+    Rating: {
       type: 'string',
       required: true
     },
@@ -45,7 +32,14 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
-  },
+    Ratinger: {
+      model: 'user',
+    },
 
+    Receiver: {
+      model: 'user',
+    }
+
+  },
 };
 

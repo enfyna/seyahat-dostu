@@ -23,61 +23,23 @@ module.exports = {
       required: true
     },
 
-    Date: {
+    Departure_Time: {
       type: 'string',
       required: true
     },
-
 
     Price: {
       type: 'number',
       required: true
     },
 
-
     Number_of_Ppl: {
       type: 'number',
       required: true
     },
 
-
-    Departure_Time: {
-      type: 'string',
-      required: true
-    },
-
-
-    Arrival_Time: {
-      type: 'string',
-      required: true
-    },
-
-
     Time: {
       type: 'string',
-      required: true
-    },
-
-
-    Driver_Name: {
-      type: 'string',
-      required: true
-    },
-
-
-    Driver_Photo: {
-      type: 'string', //?
-      required: true
-    },
-
-
-    Driver_ID: {
-      type: 'string',
-      required: true
-    },
-
-    Driver_Point: {
-      type: 'number',
       required: true
     },
 
@@ -91,19 +53,20 @@ module.exports = {
       required: true
     },
 
-
-    Car_Plate: {
-      type: 'string',
-      required: true
+    isCompleted: {
+      type: 'boolean',
+      defaultsTo: false,
     },
 
+    isRated: {
+      type: 'boolean',
+      defaultsTo: false,
+    },
 
     Message: {
       type: 'string',
       required: true
     },
-
-    // ŞÖFÖRÜN ID BİLGİSİ ALINIP DİREK CLASS ÇEKİLEBİLİR Mİ? DENENECEK
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -114,6 +77,14 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
+    Driver: {
+      model: 'user',
+      required: true,
+    },
+
+    Customer: {
+      model: 'user',
+    },
   },
 
 };

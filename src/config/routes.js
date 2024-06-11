@@ -33,6 +33,7 @@ module.exports.routes = {
    'GET /example': 'pages/example/index',
 
    'GET /login': 'pages/login/index',
+   'GET /logout': 'pages/logout/index',
    'GET /signup': 'pages/signup/index',
    'GET /profile': 'pages/profile/index',
 
@@ -42,6 +43,10 @@ module.exports.routes = {
    'GET /book': 'pages/book/index',
    'GET /reservations': 'pages/reservations/index',
 
+   'GET /become_driver': 'pages/driver/index',
+
+   'GET /create_ride': 'pages/create_ride/index',
+   'GET /create_comment': 'pages/create_comment/index',
 
    //  _   _                   _    ____ ___
    // | | | |___  ___ _ __    / \  |  _ \_ _|
@@ -49,6 +54,11 @@ module.exports.routes = {
    // | |_| \__ \  __/ |    / ___ \|  __/| |
    //  \___/|___/\___|_|___/_/   \_\_|  |___|
    //                 |_____|
+   'POST /api/users/login': 'user.login',
+   'POST /api/users/logout': 'user.logout',
+
+   'POST /api/users/point': 'user.point',
+
    'GET /api/users/find': 'user.find',
    'GET /api/users/:id': 'user.findOne',
 
@@ -57,8 +67,8 @@ module.exports.routes = {
 
    'DELETE /api/users/:id': 'user.delete',
 
+   'POST /api/users/:id/enable-driver': 'user.enableDriver',
    'GET /api/users/:id/rides': 'user.rides',
-   'POST /api/users/:id/join-ride': 'user.joinRide',
 
 
    //  ____  _     _             _    ____ ___
@@ -75,7 +85,9 @@ module.exports.routes = {
    'DELETE /api/rides/:id': 'ride.delete',
 
    'GET /api/rides/:id/users': 'ride.users',
-   'POST /api/rides/:id/join': 'ride.join',
+   'POST /api/rides/join': 'ride.join',
+   'POST /api/rides/complete': 'ride.complete',
+   'POST /api/rides/comment': 'ride.comment',
    'POST /api/rides/:id/leave': 'ride.leave',
 
 
@@ -85,13 +97,15 @@ module.exports.routes = {
    // | |__| (_) | | | | | | | | | | |  __/ | | | |_     / ___ \|  __/| |
    //  \____\___/|_| |_| |_|_| |_| |_|\___|_| |_|\__|___/_/   \_\_|  |___|
    //                                              |_____|
-   'GET /api/comments/find': 'comment.find',
-   'GET /api/comments/:to_id': 'comment.findByTo_Id',
+   'POST /api/comment/create': 'rating.create',
 
-   'POST /api/comments': 'comment.create',
-   'PUT /api/comments/:id': 'comment.update',
-   'DELETE /api/comments/:id': 'comment.delete',
+   'GET /api/comments/find': 'rating.find',
+   'GET /api/comments/:to_id': 'rating.findByTo_Id',
 
-   'GET /api/comments/:from_id': 'comment.findByFrom_Id',
+   'POST /api/comments': 'rating.create',
+   'PUT /api/comments/:id': 'rating.update',
+   'DELETE /api/comments/:id': 'rating.delete',
+
+   'GET /api/comments/:from_id': 'rating.findByFrom_Id',
 
 }

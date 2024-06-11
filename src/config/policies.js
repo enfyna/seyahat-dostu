@@ -17,6 +17,20 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  // '*': true,
+  '*': true,
 
+  'pages/my_rides/index' : 'isLoggedIn',
+  'pages/reservations/index' : 'isLoggedIn',
+
+  'pages/book/index' : 'isLoggedIn',
+
+  'pages/driver/index' : 'isLoggedIn',
+
+  'pages/create_ride/index' : 'isLoggedIn',
+  'pages/create_comment/index' : 'isLoggedIn',
+
+  'pages/logout/index' : 'isLoggedIn',
+
+  'pages/login/index' : 'isNotLoggedIn',
+  'pages/signup/index' : 'isNotLoggedIn',
 };

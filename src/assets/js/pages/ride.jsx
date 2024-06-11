@@ -1,43 +1,65 @@
-export default function Ride() {
+import Navbar from "@/components/Navbar";
+
+export default function Ride({ ride }) {
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+  const date = new Date(ride.Departure_Time)
+
+  const est_time = ride.Time
   return (
-    <div className="container mx-auto p-8">
-      <div className="bg-white shadow-md rounded-lg overflow-hidden w-full md:w-3/4 mx-auto">
-        <div className="p-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-2xl font-bold">İstanbul - Ankara Yolculuğu</h2>
-              <p className="text-gray-500">Kalkış Tarihi: 26 Temmuz 2022, 09:00</p>
-              <p className="text-gray-500">Yaklaşık Varış Tarihi: 26 Temmuz 2022, 15:00</p>
-              <p className="text-gray-500">Fiyat: 100 TL</p>
-              <p className="text-gray-500">Boş Koltuk Sayısı: 2</p>
+    <>
+      <Navbar></Navbar>
+      <div className="container mx-auto p-8 dot-pattern">
+        <div className="bg-white shadow-md rounded-lg overflow-hidden w-full md:w-3/4 mx-auto">
+          <div>
+
+            <div className="flex items-center justify-between border-b p-8">
+              <div className="">
+                <h2 className="text-2xl font-bold mb-4">{ride['Departure_Point']} - {ride['Arrival_Point']}</h2>
+                <p className="text-gray-900">Kalkış Tarihi: {date.toLocaleDateString("tr", options)}</p>
+                <p className="text-gray-900">Tahmini Yolculuk Süresi: {est_time} saat</p>
+              </div>
+              <img src="/images/logo.png" alt="User Avatar" className="w-24 h-24 rounded-full">
+              </img>
             </div>
-            <img src="https://via.placeholder.com/150" alt="User Avatar" className="w-24 h-24 rounded-full">
-            </img>
-          </div>
-          <div className="mt-8">
-            <h3 className="text-lg font-bold">Yolculuğu Düzenleyen</h3>
-            <div className="flex items-center mt-4">
-              <div>
-                <p className="font-bold">John Doe</p>
-                <p>25 yaşında, İstanbul</p>
-                <p><span className="font-bold">Araç:</span> BMW X5</p>
-                <p><span className="font-bold">İlgi Alanları:</span> Doğa yürüyüşü, tarih, fotoğrafçılık</p>
-                <p><span className="font-bold">Sigara İçiyor mu:</span> Hayır</p>
-                <p><span className="font-bold">Alkol İçiyor mu:</span> Nadiren</p>
-                <p><span className="font-bold">Puan Değerlendirmesi:</span> 4.7</p>
-                <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg mt-4 hover:bg-blue-400 transition-colors duration-300">Profilini İncele</button>
+
+            <div className="border-b p-8">
+              <h3 className="text-lg font-bold mb-2">Yolculuk Ayrıntıları</h3>
+              <div className="flex items-start justify-between">
+                <div>
+                  <p className="text-gray-900">Araç: {ride['Car_Brand']} {ride['Car_Model']}</p>
+                  <p className="text-gray-900">Fiyat: {ride['Price']} TL</p>
+                  <p className="text-gray-900">Yolcu Kapasitesi: {ride['Number_of_Ppl']}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="border-b p-8">
+              <h3 className="text-lg font-bold mb-4">Özel Mesaj</h3>
+              <p className="text-gray-900">{ride['Message']}</p>
+            </div>
+
+            <div className="border-b p-8">
+              <h3 className="text-lg font-bold mb-4">Sürücü</h3>
+              <div className="flex items-start justify-between">
+                <div>
+                  <p className="font-bold">{ride['Driver']['Name']}</p>
+                  <p className="font-extralight mb-4 text-gray-500">{ride['Driver']['Age']} yaşında, {ride['Driver']['Location']}</p>
+                </div>
+                <div>
+                  <a href={"/profile?id=" + ride.Driver.id}>
+                    <button className="text-center bg-blue-500 hover:bg-blue-900 border-blue-500 border-solid border-2 text-white px-3 py-2 text-sm font-medium rounded-full transition">Profilini İncele ↗</button>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-          <div className="mt-8">
-            <h3 className="text-lg font-bold">Özel Mesaj</h3>
-            <p>Merhaba, yolculuğumuz hakkında detaylı bilgi almak isterseniz benimle iletişime geçebilirsiniz.</p>
+          <div className="bg-gray-200 p-4 text-center">
+            <a href={"/book?id=" + ride.id}>
+              <button className="text-center bg-blue-500 hover:bg-blue-900 border-blue-500 border-solid border-2 text-white px-3 py-2 text-sm font-medium rounded-full transition">Rezervasyon Al</button>
+            </a>
           </div>
         </div>
-        <div className="bg-gray-200 p-4 text-center">
-          <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-400 transition-colors duration-300">Rezervasyon Al</button>
-        </div>
-      </div>
-    </div>
+      </div >
+    </>
   )
 }

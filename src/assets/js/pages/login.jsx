@@ -1,8 +1,12 @@
-import LoginForm from '@/components/LoginForm'
-import FormAlani from '@/components/FormAlani'
+import LoginForm from '@/components/Form/Login'
+import FormAlani from '@/components/FormAlani.jsx'
+import Navbar from '@/components/Navbar'
 
 export default function Login() {
   return (
-    <FormAlani renk="yesil" kayan_yazi="GirişYap" form={LoginForm}></FormAlani>
+    <>
+      <Navbar></Navbar>
+      <FormAlani renk="yesil" kayan_yazi="GirişYap" form={LoginForm}></FormAlani>
+    </>
   )
 }

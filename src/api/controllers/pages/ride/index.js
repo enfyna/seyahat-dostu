@@ -3,7 +3,11 @@ module.exports = {
 
   description: '',
 
-  inputs: {},
+  inputs: {
+    id:{
+      type: 'number'
+    }
+  },
 
   exits: {
     success: {
@@ -11,11 +15,12 @@ module.exports = {
     }
   },
 
-  fn: async function () {
+  fn: async function ({ id }) {
+    const ride = await Ride.findOne({ id }).populate('Driver');
     return {
       page: 'ride',
       props: {
-        //name: 'Inertia'
+        ride,
       }
     }
   }

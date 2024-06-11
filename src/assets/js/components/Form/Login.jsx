@@ -1,8 +1,9 @@
+import { router } from '@inertiajs/react';
 import { useState } from 'react';
 
 export default function LoginForm() {
   const [formData, setFormData] = useState({
-    username: '',
+    email: '',
     password: '',
   });
 
@@ -19,14 +20,16 @@ export default function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { username, password } = formData;
+    const { email, password } = formData;
 
-    if (!username || !password) {
+    if (!email || !password) {
       setShake(true);
       setTimeout(() => setShake(false), 500);
     } else {
       // Authentication logic goes here
-      alert('Logged in successfully!');
+      router.post('/api/users/login', formData, {
+        onFinish: () => router.visit('/'),
+      })
     }
   };
 
@@ -35,23 +38,26 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="bg-gray-900 p-8 rounded-lg shadow-lg max-w-md w-full">
+    <div className="flex flex-col justify-center bg-gray-900 p-8 rounded-lg shadow-lg max-w-md w-full">
+      <a href="/" className="flex justify-center pb-8 ">
+        <img className="aspect-square w-1/4" src="/images/logo.png" alt="Seyahat Dostu"></img>
+      </a>
       <form className="space-y-6" onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username" className="block text-sm font-medium text-white">Kullanıcı Adı</label>
           <input
+            placeholder="E-mail"
             type="text"
-            id="username"
-            name="username"
-            value={formData.username}
+            id="email"
+            name="email"
+            value={formData.email}
             onChange={handleChange}
             className="mt-1 block w-full p-3 bg-gray-800 text-white border border-gray-600 rounded-md form-input focus:border-teal-400 transition duration-200 ease-in-out hover:border-teal-400"
           />
         </div>
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-white">Şifre</label>
           <div className="relative">
             <input
+              placeholder="Şifre"
               type={showPassword ? 'text' : 'password'}
               id="password"
               name="password"
@@ -83,3 +89,4 @@ export default function LoginForm() {
     </div>
   );
 }
+

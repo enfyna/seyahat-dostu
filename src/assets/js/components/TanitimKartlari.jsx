@@ -1,4 +1,4 @@
-import TanitimKarti from "./TanitimKarti";
+import TanitimKarti from "./TanitimKarti.jsx";
 
 export default function TanitimKartlari() {
     return (
