@@ -17,7 +17,8 @@ module.exports = {
   },
 
   fn: async function({ rideID }) {
-    const userID = this.req.me.id
+    const user = this.req.me;
+    const userID = user.id;
     const ride = await Ride.findOne({ id:rideID })
     if( ride.Customer != userID ){
       return {
@@ -25,11 +26,12 @@ module.exports = {
       }
     }
     const driverID = ride.Driver;
-    
-    
+
+
     return {
       page: 'create_comment',
       props: {
+        user,
         userID,
         rideID,
         driverID,

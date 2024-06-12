@@ -17,12 +17,13 @@ module.exports = {
   },
 
   fn: async function(inputs) {
-    const user = await User.findOne({ id: inputs.id })
-    const ratings = await Rating.find({ Receiver: user.id }).populate('Ratinger')
+    const profile = await User.findOne({ id: inputs.id })
+    const ratings = await Rating.find({ Receiver: profile.id }).populate('Ratinger')
     return {
       page: 'profile',
       props: {
-        user,
+        user: this.req.me,
+        profile,
         ratings,
       }
     }

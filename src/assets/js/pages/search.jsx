@@ -1,11 +1,10 @@
-import HakkindaKarti from '@/components/HakkındaKarti'
 import Navbar from '@/components/Navbar'
 import SeyahatAramaSonuc from '@/components/SeyahatAramaSonuc'
 
-export default function Search({ rides }) {
+export default function Search({ user, rides }) {
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar user={user}></Navbar>
       <div className="flex f-screen flex-col items-center justify-center space-y-8 p-8 text-center text-gray-700 dot-pattern">
 
         {

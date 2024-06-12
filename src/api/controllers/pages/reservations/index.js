@@ -12,7 +12,8 @@ module.exports = {
   },
 
   fn: async function() {
-    const userID = this.req.me.id;
+    const user = this.req.me;
+    const userID = user.id;
     const rides = await Ride.find({ Customer: userID }).populate('Driver')
     const active_reservations = rides.filter((ride) => {
       return ride.Customer && !ride.isCompleted;
@@ -28,6 +29,7 @@ module.exports = {
     return {
       page: 'reservations',
       props: {
+        user,
         old_reservations,
         waiting_reservations,
         active_reservations

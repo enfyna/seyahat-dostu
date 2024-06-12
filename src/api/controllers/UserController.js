@@ -13,7 +13,6 @@ module.exports = {
       const data = req.body;
       const user = await User.create(data).fetch();
       req.session.userID = user.id;
-      sails.inertia.share('loggedInUser', user)
       return res.json({
         props: { user }
       });
@@ -30,7 +29,6 @@ module.exports = {
         Password: password
       });
       req.session.userID = user[0].id;
-      sails.inertia.share('loggedInUser', user[0])
       res.set('X-Inertia', 'true');
       return res.ok(200)
     } catch (err) {
@@ -40,7 +38,6 @@ module.exports = {
 
   logout: async function(req, res) {
     try {
-      sails.inertia.flushShared('loggedInUser')
       delete req.session.userID;
       res.set('X-Inertia', 'true');
       return res.ok(200)
@@ -93,13 +90,9 @@ module.exports = {
   enableDriver: async function(req, res) {
     try {
       res.set('X-Inertia', 'true');
-      const id = req.session.userID;
-      let user = await User.findOne({ id });
+      let user = req.me;
       user.Driver = true;
-      user.DrivingLicence = req.body.opt3;
-      user = await User.updateOne({ id }).set(user)
-      sails.inertia.flushShared('loggedInUser')
-      sails.inertia.share('loggedInUser', user)
+      user = await User.updateOne({ id: user.id }).set(user)
       return res.ok()
     }
     catch (err) {

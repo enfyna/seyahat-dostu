@@ -39,6 +39,7 @@ module.exports = {
     return {
       page: 'search',
       props: {
+        user: this.req.me,
         rides,
       }
     }

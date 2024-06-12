@@ -3,10 +3,10 @@ import BeklemedeYolculukKarti from '@/components/BeklemedeYolculukKarti'
 import AktifYolculukKarti from '@/components/AktifYolculukKarti.jsx'
 import GecmisYolculukKarti from '@/components/GecmisYolculukKarti';
 
-export default function MyRides({ active_rides, waiting_rides, history_rides }) {
+export default function MyRides({ user, active_rides, waiting_rides, history_rides }) {
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar user={user}></Navbar>
       <div className='dot-pattern w-screen'>
         <div className="container mx-auto flex flex-col space-y-8 text-gray-700 my-12 ">
 

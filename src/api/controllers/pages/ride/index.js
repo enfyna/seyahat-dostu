@@ -20,6 +20,7 @@ module.exports = {
     return {
       page: 'ride',
       props: {
+        user: this.req.me,
         ride,
       }
     }

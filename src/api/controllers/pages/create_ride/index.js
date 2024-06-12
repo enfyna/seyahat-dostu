@@ -12,10 +12,11 @@ module.exports = {
   },
 
   fn: async function () {
+    const user = this.req.me;
     return {
       page: 'create_ride',
       props: {
-        //name: 'Inertia'
+        user
       }
     }
   }

@@ -1,13 +1,13 @@
 import Navbar from "@/components/Navbar";
 
-export default function Ride({ ride }) {
+export default function Ride({ user, ride }) {
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
   const date = new Date(ride.Departure_Time)
 
   const est_time = ride.Time
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar user={user}></Navbar>
       <div className="container mx-auto p-8 dot-pattern">
         <div className="bg-white shadow-md rounded-lg overflow-hidden w-full md:w-3/4 mx-auto">
           <div>

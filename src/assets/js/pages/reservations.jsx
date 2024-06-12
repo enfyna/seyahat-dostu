@@ -2,10 +2,10 @@ import Navbar from '@/components/Navbar'
 import GecmisRezervasyonKarti from '@/components/GeçmişRezervasyonKarti'
 import AktifYolculukKarti from '@/components/AktifYolculukKarti';
 
-export default function Reservations({ active_reservations, waiting_reservations, old_reservations }) {
+export default function Reservations({ user, active_reservations, waiting_reservations, old_reservations }) {
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar user={user}></Navbar>
       <div className='w-screen dot-pattern'>
         <div className="container mx-auto flex f-screen flex-col space-y-8 text-gray-700 my-12">
 

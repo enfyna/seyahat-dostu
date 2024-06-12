@@ -1,11 +1,7 @@
 import NavbarKullaniciMenu from "./NavbarKullaniciMenu";
 import { useEffect, useState, useRef } from 'react';
-import { usePage } from "@inertiajs/react";
 
-export default function Navbar() {
-  const { props } = usePage();
-  const { loggedInUser } = props;
-
+export default function Navbar({ user }) {
   const [show, setShow] = useState(false);
   const toggle = () => setShow(show => !show)
 
@@ -45,9 +41,9 @@ export default function Navbar() {
                 <img className="h-12 w-12" src="/images/logo.png" alt="Seyahat Dostu"></img>
               </a>
             </div>
-            {loggedInUser ?
+            {user ?
               <div className="hidden sm:ml-6 sm:flex space-x-4 justify-center items-center">
-                {loggedInUser['Driver'] &&
+                {user['Driver'] &&
                   <a href="/my_rides" className="border-2 border-yellow-600 text-white bg-yellow-600 hover:bg-yellow-800 rounded-full px-3 py-2 text-sm font-medium transition">Yolculuklarım</a>
                 }
                 <a href="/reservations" className="border-2 border-gray-700 text-gray-300 bg-gray-700 hover:bg-gray-900 hover:text-white rounded-full px-3 py-2 text-sm font-medium transition" aria-current="page">Rezervasyonlarım</a>
@@ -60,15 +56,15 @@ export default function Navbar() {
             }
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            {loggedInUser &&
-              <NavbarKullaniciMenu user={loggedInUser}></NavbarKullaniciMenu>
+            {user &&
+              <NavbarKullaniciMenu user={user}></NavbarKullaniciMenu>
             }
           </div>
         </div>
       </div>
-      {loggedInUser ?
+      {user ?
         <div className={`${show ? 'h-24' : 'h-0'} transition-all overflow-hidden space-y-1 px-4 sm:hidden`} id="mobile-menu">
-          {loggedInUser['Driver'] &&
+          {user['Driver'] &&
             <a href="/my_rides" className="block border-2 border-yellow-600 text-white bg-yellow-600 hover:bg-yellow-800 rounded-full px-3 py-2 text-sm font-medium transition">Yolculuklarım</a>
           }
           <a href="/reservations" className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-full px-3 py-2 text-base font-medium transition" aria-current="page">Rezervasyonlarım</a>

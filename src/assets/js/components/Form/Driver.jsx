@@ -1,7 +1,9 @@
 import { router } from '@inertiajs/react';
 import { useState } from 'react';
 
-export default function DriverForm() {
+export default function DriverForm({ user }) {
+  const userID = user.id;
+
   const [formData, setFormData] = useState({
     opt1: '',
     opt2: '',
