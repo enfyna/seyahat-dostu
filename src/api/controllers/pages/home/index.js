@@ -12,10 +12,11 @@ module.exports = {
   },
 
   fn: async function () {
+    const user = this.req.me;
     return {
       page: 'index',
       props: {
-        name: 'Inertia'
+        user
       }
     }
   }

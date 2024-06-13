@@ -15,7 +15,7 @@ module.exports = {
     return {
       page: 'login',
       props: {
-        //name: 'Inertia'
+        user: this.req.me,
       }
     }
   }

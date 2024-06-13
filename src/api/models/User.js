@@ -13,19 +13,44 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
-    Interests: {
+    Name: {
       type: 'string',
       required: true
     },
 
-    Driver: {
-      type: 'boolean',
+    Email: {
+      type: 'string',
       required: true
     },
 
-    Photograph: {
-      type: 'string', // ??
+    Phone: {
+      type: 'string',
       required: true
+    },
+
+    Password: {
+      type: 'string',
+      required: true
+    },
+
+    Interests: {
+      type: 'string',
+      defaultsTo: ''
+    },
+
+    Driver: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+
+    DrivingLicence: {
+      type: 'string',
+      allowNull: true,
+    },
+
+    Photograph: {
+      type: 'string',
+      allowNull: true,
     },
 
     Age: {
@@ -40,17 +65,17 @@ module.exports = {
 
     Smoking: {
       type: 'boolean',
-      required: true
+      defaultsTo: false
     },
 
     Point: {
       type: 'number',
-      required: true
+      defaultsTo: 0,
     },
 
     About: {
       type: 'string',
-      required: true
+      defaultsTo: ''
     },
 
 
@@ -63,7 +88,28 @@ module.exports = {
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
+    GivenRatings: {
+      collection: 'rating',
+      via: 'Ratinger'
+    },
+
+    ReceivedRatings: {
+      collection: 'rating',
+      via: 'Receiver'
+    },
+
+    Reservations: {
+      collection: 'ride',
+      via: 'Customer'
+    },
+
+    Rides: {
+      collection: 'ride',
+      via: 'Driver'
+    }
   },
 
+  customToJSON: function () {
+    return _.omit(this, ['Password']);
+  },
 };
-

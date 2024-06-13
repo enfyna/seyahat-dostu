@@ -1,9 +1,14 @@
 module.exports = {
-  friendlyName: 'Home',
+  friendlyName: 'Profile Page',
 
-  description: 'Home index.',
+  description: 'Profile Page of a given user',
 
-  inputs: {},
+  inputs: {
+    id: {
+      type: 'number',
+      required: true,
+    }
+  },
 
   exits: {
     success: {
@@ -11,11 +16,15 @@ module.exports = {
     }
   },
 
-  fn: async function () {
+  fn: async function(inputs) {
+    const profile = await User.findOne({ id: inputs.id })
+    const ratings = await Rating.find({ Receiver: profile.id }).populate('Ratinger')
     return {
       page: 'profile',
       props: {
-        //name: 'Inertia'
+        user: this.req.me,
+        profile,
+        ratings,
       }
     }
   }

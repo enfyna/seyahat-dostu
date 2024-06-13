@@ -1,20 +1,15 @@
-import { Link } from '@inertiajs/react'
-import Logo from '@/components/Logo'
+import BookForm from "@/components/Form/Book";
+import FormAlani from "@/components/FormAlani";
+import Navbar from "@/components/Navbar";
 
-export default function Index() {
+export default function Book({ user, rideID }) {
   return (
-    <div className="flex f-screen flex-col items-center justify-center space-y-8 text-center text-gray-700">
-      <Link href="/search" className="text-purple-600 underline">
-        Seyahat Bul
-      </Link>
-
-      <div className="flex flex-row items-center justify-center space-x-8">
-        <Logo url="tailwind.com" name="tailwind"></Logo>
-        <Logo url="tailwind.com" name="tailwind"></Logo>
-        <Logo url="tailwind.com" name="tailwind"></Logo>
-        <Logo url="tailwind.com" name="tailwind"></Logo>
+    <>
+      <Navbar user={user}></Navbar>
+      <div className="flex f-screen flex-col items-center justify-center space-y-8 text-center text-gray-700">
+        <FormAlani kayan_yazi={"RezervasyonAl"} renk={"yesil"} form={BookForm} form_props={{rideID }}></FormAlani>
       </div>
-    </div>
+    </>
   )
 }
 

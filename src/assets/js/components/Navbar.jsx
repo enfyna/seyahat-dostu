@@ -1,7 +1,7 @@
 import NavbarKullaniciMenu from "./NavbarKullaniciMenu";
 import { useEffect, useState, useRef } from 'react';
 
-export default function Navbar() {
+export default function Navbar({ user }) {
   const [show, setShow] = useState(false);
   const toggle = () => setShow(show => !show)
 
@@ -9,7 +9,6 @@ export default function Navbar() {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
-        // Clicked outside of the menu, so close it
         setShow(false);
       }
     };
@@ -42,27 +41,40 @@ export default function Navbar() {
                 <img className="h-12 w-12" src="/images/logo.png" alt="Seyahat Dostu"></img>
               </a>
             </div>
-            <div className="hidden sm:ml-6 sm:flex space-x-4 justify-center items-center">
-              <a href="/my_rides" className="text-white bg-yellow-600 hover:bg-yellow-300 hover:text-black rounded-md px-3 py-2 text-sm font-medium transition">Yolculuklarım</a>
-              <a href="/reservations" className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium transition" aria-current="page">Rezervasyonlarım</a>
-            </div>
+            {user ?
+              <div className="hidden sm:ml-6 sm:flex space-x-4 justify-center items-center">
+                {user['Driver'] &&
+                  <a href="/my_rides" className="border-2 border-yellow-600 text-white bg-yellow-600 hover:bg-yellow-800 rounded-full px-3 py-2 text-sm font-medium transition">Yolculuklarım</a>
+                }
+                <a href="/reservations" className="border-2 border-gray-700 text-gray-300 bg-gray-700 hover:bg-gray-900 hover:text-white rounded-full px-3 py-2 text-sm font-medium transition" aria-current="page">Rezervasyonlarım</a>
+              </div>
+              :
+              <div className="hidden sm:ml-6 sm:flex space-x-4 justify-center items-center">
+                <a href="/signup" className="border-2 border-yellow-600 text-white bg-yellow-600 hover:bg-yellow-800 rounded-full px-3 py-2 text-sm font-medium transition">Kayıt Ol</a>
+                <a href="/login" className="border-2 border-gray-700 text-gray-300 bg-gray-700 hover:bg-gray-900 hover:text-white rounded-full px-3 py-2 text-sm font-medium transition" aria-current="page">Giriş Yap</a>
+              </div>
+            }
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <button type="button" className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-              <span className="absolute -inset-1.5"></span>
-              <span className="sr-only">Bildirimler</span>
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-              </svg>
-            </button>
-            <NavbarKullaniciMenu></NavbarKullaniciMenu>
+            {user &&
+              <NavbarKullaniciMenu user={user}></NavbarKullaniciMenu>
+            }
           </div>
         </div>
       </div>
-      <div className={`${show ? 'h-24' : 'h-0'} transition-all overflow-hidden space-y-1 px-4 sm:hidden`} id="mobile-menu">
-        <a href="/my_rides" className="text-white bg-yellow-600 hover:bg-yellow-300 hover:text-black block rounded-md px-3 py-2 text-base font-medium transition">Yolculuklarım</a>
-        <a href="/reservations" className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium transition" aria-current="page">Rezervasyonlarım</a>
-      </div>
+      {user ?
+        <div className={`${show ? 'h-24' : 'h-0'} transition-all overflow-hidden space-y-1 px-4 sm:hidden`} id="mobile-menu">
+          {user['Driver'] &&
+            <a href="/my_rides" className="block border-2 border-yellow-600 text-white bg-yellow-600 hover:bg-yellow-800 rounded-full px-3 py-2 text-sm font-medium transition">Yolculuklarım</a>
+          }
+          <a href="/reservations" className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-full px-3 py-2 text-base font-medium transition" aria-current="page">Rezervasyonlarım</a>
+        </div>
+        :
+        <div className={`${show ? 'h-24' : 'h-0'} transition-all overflow-hidden space-y-1 px-4 sm:hidden`} id="mobile-menu">
+          <a href="/signup" className="block border-2 border-yellow-600 text-white bg-yellow-600 hover:bg-yellow-800 rounded-full px-3 py-2 text-sm font-medium transition">Kayıt Ol</a>
+          <a href="/login" className="block border-2 border-gray-700 text-gray-300 bg-gray-700 hover:bg-gray-900 hover:text-white rounded-full px-3 py-2 text-sm font-medium transition" aria-current="page">Giriş Yap</a>
+        </div>
+      }
     </nav>
   )
 }

@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("./fonts/Inter/Inter-VariableFont.ttf")
+  }
+
+  html {
+    font-family: Inter !important;
+  }
+
+}
+
+.dot-pattern {
+  background: white;
+  background-image: radial-gradient(#cccccc 1px, transparent 0);
+  background-size: 40px 40px;
+  background-position: -15px -15px;
+}
+
 .form-pattern {
   --s: 10vh;
   --p: calc(var(--s) / 2);
@@ -9,7 +31,7 @@
   --e: linear;
 
   background-image:
-    linear-gradient(315deg, #fff 40%, transparent  40%),
+    linear-gradient(315deg, #fff 40%, transparent 40%),
     linear-gradient(45deg, #14b8a6 40%, #fff 40%);
   background-size: var(--p);
   background-position-y: var(--p);

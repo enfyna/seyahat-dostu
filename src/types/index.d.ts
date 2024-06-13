@@ -171,3 +171,5 @@ interface LoggedInUser {
 declare const sails: Sails
 
 declare const User
+declare const Ride
+declare const Rating

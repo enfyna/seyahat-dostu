@@ -3,7 +3,12 @@ module.exports = {
 
   description: 'Book a Reservation',
 
-  inputs: {},
+  inputs: {
+    id: {
+      type: 'number',
+      required: true
+    },
+  },
 
   exits: {
     success: {
@@ -11,11 +16,18 @@ module.exports = {
     }
   },
 
-  fn: async function () {
+  fn: async function ({ id }) {
+    const user = this.req.me;
+    const ride = await Ride.findOne({ id });
+    if(ride.Driver.id == user.id){
+      return {
+        page: 'index',
+      }
+    }
     return {
       page: 'book',
       props: {
-        //name: 'Inertia'
+        rideID: ride.id,
       }
     }
   }

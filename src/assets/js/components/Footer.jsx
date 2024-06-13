@@ -13,15 +13,15 @@ export default function Footer() {
               Yolculuk yapmanın yeni ve keyifli hali.
             </div>
           </div>
-          <div className="flex flex-row flex-wrap justify-between p-2 py-12 gap-8">
+          <div className="flex flex-row flex-wrap justify-between p-6 py-12 gap-8">
             <div className="basis-full md:basis-3/5 text-gray-100">
               Seyahat Dostu, paylaşımlı yolculuklarla bireysel yolculuk maliyetlerini azaltmanın ve yeni insanlarla tanışmanın harika bir yoludur. Güvenlik önlemleri ve kullanıcı değerlendirmeleri sayesinde güvenli ve güvenilir bir seyahat deneyimi sunar. WEB tabanlı altyapısı sayesinde her yerden erişim imkanı sağlar.
             </div>
-            <div className="flex flex-row flex-wrap gap-4 basis-full md:basis-1/5 justify-center items-center">
-              <a href="#" className="text-center bg-gray-700 hover:bg-gray-900 border-gray-700 border-solid border-2 text-white px-3 py-2 text-sm font-medium rounded-full w-40 transition">
+            <div className="flex flex-row flex-wrap gap-4 basis-full md:basis-1/5 justify-center md:justify-end items-center">
+              <a href="/#Hakkinda" className="text-center bg-gray-700 hover:bg-gray-900 border-gray-700 border-solid border-2 text-white px-3 py-2 text-sm font-medium rounded-full w-40 transition">
                 Hakkımızda
               </a>
-              <a href="#" className="text-center bg-gray-700 hover:bg-gray-900 border-gray-700 border-solid border-2 text-white px-3 py-2 text-sm font-medium rounded-full w-40 transition">
+              <a href="/#GizlilikPolitikasi" className="text-center bg-gray-700 hover:bg-gray-900 border-gray-700 border-solid border-2 text-white px-3 py-2 text-sm font-medium rounded-full w-40 transition">
                 Gizlilik Politikası
               </a>
               <a href="/#SSS" className="text-center bg-gray-700 hover:bg-gray-900 border-gray-700 border-solid border-2 text-white px-3 py-2 text-sm font-medium rounded-full w-40 transition">
